@@ -11,7 +11,12 @@ const authRoutes = require("./routes/authRouts");
 const userRoutes = require("./routes/userRouts");
 const movieRoutes = require("./routes/movieRouts");
 
-//Connect to Mongo DB
+// Routes Middleware
+app.use("/api/auth", authRoutes);
+app.use("/api/user", userRoutes);
+app.use("/api/movie", movieRoutes);
+
+//Connect to Mongo DB and start app
 const start = async () => {
   try {
     await mongoose.connect(
@@ -19,6 +24,7 @@ const start = async () => {
       { useNewUrlParser: true, useUnifiedTopology: true },
       () => console.log("Connected to DB")
     );
+    app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
   } catch (error) {
     console.log(error);
     process.exit(1);
@@ -26,10 +32,3 @@ const start = async () => {
 };
 
 start();
-
-// Routes Middleware
-app.use("/api/auth", authRoutes);
-app.use("/api/user", userRoutes);
-app.use("/api/movie", movieRoutes);
-
-app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
