@@ -1,10 +1,13 @@
 require("dotenv").config();
 const express = require("express");
+const fileUpload = require("express-fileupload");
 const mongoose = require("mongoose");
-const app = express();
 
 const PORT = process.env.PORT || 5555;
 const db = process.env.DB_URL;
+
+const app = express();
+app.use(fileUpload({}));
 
 //Import Routes
 const authRoutes = require("./routes/authRouts");

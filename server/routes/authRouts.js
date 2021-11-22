@@ -11,7 +11,6 @@ const {
 
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
 
-// /api/auth/signup
 router.post("/signup", urlencodedParser, signUpController);
 
 // /api/auth/signin
