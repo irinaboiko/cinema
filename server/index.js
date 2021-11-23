@@ -14,7 +14,11 @@ const authRoutes = require("./routes/authRouts");
 const userRoutes = require("./routes/userRouts");
 const movieRoutes = require("./routes/movieRouts");
 
-// Routes Middleware
+//Add Middleware
+app.use(express.json());
+app.use(express.urlencoded());
+
+//Routes Middleware
 app.use("/api/auth", authRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/movie", movieRoutes);

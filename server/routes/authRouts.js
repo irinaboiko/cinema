@@ -1,5 +1,4 @@
 const { Router } = require("express");
-const bodyParser = require("body-parser");
 const router = Router();
 const {
   signUpController,
@@ -9,16 +8,10 @@ const {
   isValidCredentialsMiddleware,
 } = require("../middlewares/authMiddlewares");
 
-const urlencodedParser = bodyParser.urlencoded({ extended: false });
-
-router.post("/signup", urlencodedParser, signUpController);
+// /api/auth/signup
+router.post("/signup", signUpController);
 
 // /api/auth/signin
-router.post(
-  "/signin",
-  urlencodedParser,
-  isValidCredentialsMiddleware,
-  signInController
-);
+router.post("/signin", isValidCredentialsMiddleware, signInController);
 
 module.exports = router;
