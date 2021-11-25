@@ -1,5 +1,7 @@
 import { combineReducers } from "redux";
 
-export const rootReducer = combineReducers({});
+import loginReducer from "../pages/LoginPage/reducers";
 
-export type rootState = ReturnType<typeof rootReducer>;
+export const rootReducer = combineReducers({ auth: loginReducer });
+
+export type RootState = ReturnType<typeof rootReducer>;

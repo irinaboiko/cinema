@@ -2,12 +2,15 @@ require("dotenv").config();
 const express = require("express");
 const fileUpload = require("express-fileupload");
 const mongoose = require("mongoose");
+const cors = require("cors");
 
 const PORT = process.env.PORT || 5555;
 const db = process.env.DB_URL;
 
 const app = express();
+
 app.use(fileUpload({}));
+app.use(cors());
 
 //Import Routes
 const authRoutes = require("./routes/authRouts");
