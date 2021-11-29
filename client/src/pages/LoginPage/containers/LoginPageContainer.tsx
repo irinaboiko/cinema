@@ -20,15 +20,10 @@ const LoginPageContainer: FC = () => {
 
   const { isLoading, errors, isAuth } = useTypedSelector((state) => state.auth);
 
-  /*const isAuth = false;
-  const isLoading = false;
-  const errors = "";*/
-
   const handleSubmit = useCallback(
     (event) => {
       event.preventDefault();
       dispatch(LOGIN_REQUEST(formValues));
-      //console.log(formValues);
     },
     [dispatch, formValues]
   );
@@ -37,7 +32,7 @@ const LoginPageContainer: FC = () => {
     if (isAuth) {
       navigate(ROUTES.MOVIES);
     }
-  }, [dispatch, isAuth]);
+  }, [navigate, isAuth]);
 
   return (
     <LoginPageLayout

@@ -11,7 +11,7 @@ function* sendRequest(action: SendRequestAction) {
     const foundApiCall = apiCallsMapping(action.type);
 
     const response: AxiosResponse = yield call(foundApiCall, action.payload);
-    console.log(response);
+
     const generatedSuccessAction = createActionWithPostfix(
       action,
       response.data,

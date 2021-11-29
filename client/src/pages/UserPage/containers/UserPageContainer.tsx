@@ -1,9 +1,12 @@
 import React, { FC } from "react";
 
 import UserPageLayout from "../components/UserPageLayout";
+import { useTypedSelector } from "../../../hooks";
 
 const UserPageContainer: FC = () => {
-  return <UserPageLayout />;
+  const { userInfo } = useTypedSelector((state) => state.auth);
+
+  return <UserPageLayout userInfo={userInfo} />;
 };
 
 export default UserPageContainer;

@@ -38,7 +38,7 @@ api.interceptors.response.use(
     const { url } = config;
 
     if (url === "auth/signin") {
-      LocalStorageService.saveUserToken(data.accessToken);
+      LocalStorageService.saveUserToken(data.userToken);
     }
 
     return response;

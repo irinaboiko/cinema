@@ -1,7 +1,17 @@
 import React, { FC } from "react";
+import { UserDto } from "../dto/user.dtos";
+import UserCard from "../../../commonComponents/Cards/UserCard";
 
-const UserPageLayout: FC = () => {
-  return <div>User Page</div>;
+interface ILoginPageLayoutProps {
+  userInfo: UserDto;
+}
+
+const UserPageLayout: FC<ILoginPageLayoutProps> = ({ userInfo }) => {
+  return (
+    <div>
+      <UserCard userInfo={userInfo} />
+    </div>
+  );
 };
 
 export default UserPageLayout;
