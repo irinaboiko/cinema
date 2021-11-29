@@ -25,7 +25,7 @@ api.interceptors.request.use((config: AxiosRequestConfig) => {
   const token = LocalStorageService.getUserToken();
 
   if (token) {
-    config.headers["Authorization"] = `Bearer ${token}`;
+    config.headers!.Authorization = `Bearer ${token}`;
   }
 
   return config;
