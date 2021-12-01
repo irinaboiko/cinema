@@ -13,10 +13,10 @@ const getAllMoviesController = async (req, res) => {
 };
 
 const getMovieController = async (req, res) => {
-  const { movieId } = req.params;
+  const { id } = req.params;
 
   try {
-    const movie = await Movie.find({ _id: movieId });
+    const movie = await Movie.findOne({ _id: id });
 
     res.status(201).json(movie);
   } catch (error) {
