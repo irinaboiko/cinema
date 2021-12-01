@@ -31,6 +31,7 @@ const loginReducer = createReducer(defaultState, (handleAction) => [
     };
   }),
   handleAction(actions.LOGIN_SUCCESS, (state, { payload }) => {
+    console.log(payload);
     return {
       ...state,
       userInfo: payload.response.user,

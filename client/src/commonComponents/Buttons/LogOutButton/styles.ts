@@ -1,14 +1,11 @@
 const styles = () => ({
-  toolbar: {
-    justifyContent: "flex-end",
-  },
-  link: {
-    color: "#ffffff",
-    textDecoration: "none",
-  },
   button: {
     color: "#ffffff",
     borderColor: "#ffffff",
+
+    "&:last-child": {
+      marginLeft: 10,
+    },
   },
 });
 

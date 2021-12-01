@@ -6,8 +6,6 @@ export interface INavItems {
 }
 
 export const navTabs: INavItems[] = [
-  { title: "Login", path: ROUTES.LOGIN },
   { title: "Movies", path: ROUTES.MOVIES },
   { title: "My Account", path: ROUTES.USER },
-  { title: "Admin Panel", path: ROUTES.ADMIN },
 ];

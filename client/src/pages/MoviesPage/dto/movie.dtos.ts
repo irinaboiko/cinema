@@ -1,6 +1,7 @@
 export interface IMovie {
   _id: string;
   name: string;
+  image?: string;
   genre: string[];
   description: string;
   runtime: string;

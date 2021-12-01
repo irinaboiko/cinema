@@ -10,6 +10,8 @@ import {
 import { Link } from "react-router-dom";
 
 import { navTabs } from "./navTabs";
+import { useTypedSelector } from "../../hooks";
+import LogOutButton from "../Buttons/LogOutButton";
 
 import styles from "./styles";
 
@@ -20,6 +22,8 @@ interface IHeaderProps extends WithStyles<typeof styles> {}
 }*/
 
 const Header: FC<IHeaderProps> = ({ classes }) => {
+  const { userInfo } = useTypedSelector((state) => state.auth);
+
   return (
     <>
       <Box sx={{ flexGrow: 1 }}>
@@ -36,6 +40,14 @@ const Header: FC<IHeaderProps> = ({ classes }) => {
                 </Link>
               </Button>
             ))}
+            {userInfo.role === "ADMIN" && (
+              <Button variant="outlined" className={classes.button}>
+                <Link to={"/admin"} className={classes.link}>
+                  ADMIN PANEL
+                </Link>
+              </Button>
+            )}
+            <LogOutButton />
           </Toolbar>
         </AppBar>
       </Box>

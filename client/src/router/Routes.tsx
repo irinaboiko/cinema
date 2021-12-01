@@ -2,15 +2,17 @@ import React, { FC } from "react";
 import { Route, Routes } from "react-router-dom";
 
 import { ROUTES } from "./routeNames";
+import PrivateRoute from "./PrivateRoute";
 import LoginPageContainer from "../pages/LoginPage/containers/LoginPageContainer";
 import UserPageContainer from "../pages/UserPage/containers/UserPageContainer";
 import MoviesPageContainer from "../pages/MoviesPage/containers/MoviesPageContainer";
 import AdminPanelPageContainer from "../pages/AdminPanelPage/containers/AdminPanelPageContainer";
-import PrivateRoute from "./PrivateRoute";
+import NotFoundPageLayout from "../pages/NotFoundPage/components/NotFoundPageLayout";
 
 const RoutesComponent: FC = () => {
   return (
     <Routes>
+      <Route path="*" element={<NotFoundPageLayout />} />
       <Route path={ROUTES.LOGIN} element={<LoginPageContainer />} />
       <Route
         path={ROUTES.USER}
