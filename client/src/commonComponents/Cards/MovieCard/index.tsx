@@ -12,9 +12,10 @@ const MovieCard: FC<MovieCardProps> = ({
   index,
   handleGoToMovieDetailsPage,
 }) => {
-  const imageUrl = movieInfo.image
-    ? `${process.env.REACT_APP_API_URL}${movieInfo.image}`
-    : null;
+  const imageUrl =
+    process.env.REACT_APP_API_URL && movieInfo.image
+      ? `${process.env.REACT_APP_API_URL}/${movieInfo.image}`
+      : null;
 
   return (
     <div
@@ -22,11 +23,7 @@ const MovieCard: FC<MovieCardProps> = ({
       onClick={() => handleGoToMovieDetailsPage(movieInfo._id)}
     >
       {imageUrl && (
-        <img
-          style={{ width: "100px" }}
-          src={`${process.env.REACT_APP_API_URL}${movieInfo.image}`}
-          alt="movie poster"
-        />
+        <img style={{ width: "100px" }} src={imageUrl} alt="movie poster" />
       )}
       <p>{index + 1}</p>
       <p>{movieInfo._id}</p>

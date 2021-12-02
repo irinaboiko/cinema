@@ -5,6 +5,7 @@ import MoviesPageLayout from "../components/MoviesPageLayout";
 import { GET_MOVIES_REQUEST } from "../actions";
 import { useTypedSelector } from "../../../hooks";
 import { useNavigate } from "react-router-dom";
+import { ROUTES } from "../../../router/routeNames";
 
 const MoviesPageContainer: FC = () => {
   const dispatch = useDispatch();
@@ -18,8 +19,7 @@ const MoviesPageContainer: FC = () => {
 
   const handleGoToMovieDetailsPage = useCallback(
     (id) => {
-      console.log(id);
-      //navigate(`${ROUTES.MOVIES}/${id}`);
+      navigate(`${ROUTES.MOVIES}movies/${id}`);
     },
     [navigate]
   );

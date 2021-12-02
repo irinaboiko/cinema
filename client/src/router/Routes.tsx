@@ -8,6 +8,7 @@ import UserPageContainer from "../pages/UserPage/containers/UserPageContainer";
 import MoviesPageContainer from "../pages/MoviesPage/containers/MoviesPageContainer";
 import AdminPanelPageContainer from "../pages/AdminPanelPage/containers/AdminPanelPageContainer";
 import NotFoundPageLayout from "../pages/NotFoundPage/components/NotFoundPageLayout";
+import MovieDetailsPageContainer from "../pages/MovieDetailsPage/containers/MovieDetailsPageContainer";
 
 const RoutesComponent: FC = () => {
   return (
@@ -27,6 +28,14 @@ const RoutesComponent: FC = () => {
         element={
           <PrivateRoute>
             <MoviesPageContainer />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path={ROUTES.MOVIES_DETAILS}
+        element={
+          <PrivateRoute>
+            <MovieDetailsPageContainer />
           </PrivateRoute>
         }
       />
