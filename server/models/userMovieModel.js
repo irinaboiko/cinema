@@ -1,13 +1,17 @@
 const mongoose = require("mongoose");
+const User = require("./userModel");
+const Movie = require("./movieModel");
 const Schema = mongoose.Schema;
 
 const userMovieSchema = new Schema({
   user_id: {
-    type: String,
+    type: mongoose.SchemaType.ObjectId,
+    ref: User,
     required: true,
   },
   movie_id: {
-    type: String,
+    type: mongoose.SchemaType.ObjectId,
+    ref: Movie,
     required: true,
   },
   user_rating: Number,
@@ -22,6 +26,14 @@ const userMovieSchema = new Schema({
   is_watch_later: {
     type: Boolean,
     default: false,
+  },
+  createdAt: {
+    type: Date,
+    default: new Date(),
+  },
+  updatedAt: {
+    type: Date,
+    default: new Date(),
   },
 });
 

@@ -4,7 +4,7 @@ const Movie = require("../models/movieModel");
 
 const getAllMoviesController = async (req, res) => {
   try {
-    const movies = await Movie.find();
+    const movies = await Movie.find().sort({ name: 1 });
 
     res.status(201).json(movies);
   } catch (error) {

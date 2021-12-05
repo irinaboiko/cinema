@@ -10,6 +10,7 @@ const userSchema = new Schema({
     type: String,
     required: true,
     unique: true,
+    lowercase: true,
   },
   password: {
     type: String,
@@ -20,6 +21,14 @@ const userSchema = new Schema({
     type: String,
     required: true,
     default: "USER",
+  },
+  createdAt: {
+    type: Date,
+    default: new Date(),
+  },
+  updatedAt: {
+    type: Date,
+    default: new Date(),
   },
 });
 

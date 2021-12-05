@@ -16,6 +16,15 @@ const movieSchema = new Schema({
   age_rating: String,
   released: String,
   country: String,
+  createdAt: {
+    type: Date,
+    immutable: true,
+    default: new Date(),
+  },
+  updatedAt: {
+    type: Date,
+    default: new Date(),
+  },
 });
 
 const Movie = mongoose.model("Movie", movieSchema);
