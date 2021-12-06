@@ -12,18 +12,6 @@ const getAllMoviesController = async (req, res) => {
   }
 };
 
-const getMovieController = async (req, res) => {
-  const { id } = req.params;
-
-  try {
-    const movie = await Movie.findOne({ _id: id });
-
-    res.status(201).json(movie);
-  } catch (error) {
-    res.status(500).json({ message: `${error}, Something went wrong...` });
-  }
-};
-
 const addMovieController = async (req, res) => {
   try {
     const { name, genre, description, runtime, age_rating, released, country } =
@@ -52,8 +40,33 @@ const addMovieController = async (req, res) => {
   }
 };
 
+const getMovieController = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const movie = await Movie.findOne({ _id: id });
+
+    res.status(201).json(movie);
+  } catch (error) {
+    res.status(500).json({ message: `${error}, Something went wrong...` });
+  }
+};
+
+const deleteMovieController = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    await Movie.deleteOne({ _id: id });
+
+    res.status(201).json(id);
+  } catch (error) {
+    res.status(500).json({ message: `${error}, Something went wrong...` });
+  }
+};
+
 module.exports = {
   getAllMoviesController,
   getMovieController,
   addMovieController,
+  deleteMovieController,
 };

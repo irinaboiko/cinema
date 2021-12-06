@@ -44,12 +44,7 @@ const MovieDetailsPageLayout: FC<MovieDetailsPageLayoutProps> = ({
           <h1>{movieInfo.name}</h1>
           <p>{movieInfo._id}</p>
           <p>{movieInfo.description}</p>
-          <p>
-            Genres:
-            {movieInfo.genre?.map((genre) => {
-              return <span key={genre}> {genre}</span>;
-            })}
-          </p>
+          <p>{movieInfo.genre}</p>
           <p>{movieInfo.runtime}</p>
           <p>{movieInfo.age_rating}</p>
           <p>{movieInfo.released}</p>

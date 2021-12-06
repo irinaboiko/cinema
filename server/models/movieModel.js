@@ -7,7 +7,7 @@ const movieSchema = new Schema({
     required: true,
   },
   image: String,
-  genre: [String],
+  genre: String,
   description: {
     type: String,
     maxlength: 1000,

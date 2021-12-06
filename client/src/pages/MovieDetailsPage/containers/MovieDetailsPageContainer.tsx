@@ -20,7 +20,6 @@ const MovieDetailsPageContainer: FC = () => {
   }, [dispatch, id]);
 
   const handleOnBackButtonClick = () => {
-    //console.log(1);
     navigate(-1);
   };
 

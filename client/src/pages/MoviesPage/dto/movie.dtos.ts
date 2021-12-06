@@ -2,7 +2,7 @@ export interface IMovie {
   _id: string;
   name: string;
   image?: string;
-  genre: string[];
+  genre: string;
   description: string;
   runtime: string;
   age_rating: string;

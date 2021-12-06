@@ -4,9 +4,13 @@ import { IMovie } from "../../../pages/MoviesPage/dto/movie.dtos";
 
 interface AdminMovieCardProps {
   movie: IMovie;
+  handleDeleteMovie: (id: string) => void;
 }
 
-const AdminMovieCard: FC<AdminMovieCardProps> = ({ movie }) => {
+const AdminMovieCard: FC<AdminMovieCardProps> = ({
+  movie,
+  handleDeleteMovie,
+}) => {
   const imageUrl =
     process.env.REACT_APP_API_URL && movie.image
       ? `${process.env.REACT_APP_API_URL}/${movie.image}`
@@ -23,8 +27,8 @@ const AdminMovieCard: FC<AdminMovieCardProps> = ({ movie }) => {
         <p>{movie.description}</p>
       </div>
       <div>
-        <Button>Изменить</Button>
-        <Button>Удалить</Button>
+        <Button onClick={() => console.log("EDIT EDIT EDIT")}>Edit</Button>
+        <Button onClick={() => handleDeleteMovie(movie._id)}>Delete</Button>
       </div>
     </div>
   );
