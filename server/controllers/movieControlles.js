@@ -3,10 +3,21 @@ const path = require("path");
 const Movie = require("../models/movieModel");
 
 const getAllMoviesController = async (req, res) => {
-  try {
-    const movies = await Movie.find().sort({ name: 1 });
+  const { limit = 5, page = 1 } = req.query;
+  const skip = limit * (page - 1);
 
-    res.status(201).json(movies);
+  try {
+    const movies = await Movie.find()
+      .sort({ name: 1 })
+      .skip(skip)
+      .limit(Number(limit));
+
+    const count = await Movie.countDocuments();
+
+    res.status(201).json({
+      count,
+      movies,
+    });
   } catch (error) {
     res.status(500).json({ message: `${error}, Something went wrong...` });
   }

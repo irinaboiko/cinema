@@ -6,7 +6,7 @@ interface AdminMovieResponsePayload extends CustomPayload {}
 
 export const GET_ADMIN_MOVIES_REQUEST = createActionCreator(
   "GET_ADMIN_MOVIES_REQUEST",
-  (resolve) => () => resolve()
+  (resolve) => (payload: number) => resolve(payload)
 );
 export const GET_ADMIN_MOVIES_SUCCESS = createActionCreator(
   "GET_ADMIN_MOVIES_SUCCESS",
@@ -23,9 +23,14 @@ export const DELETE_MOVIE_REQUEST = createActionCreator(
 );
 export const DELETE_MOVIE_SUCCESS = createActionCreator(
   "DELETE_MOVIE_SUCCESS",
-  (resolve) => (payload: string) => resolve(payload)
+  (resolve) => (payload: AdminMovieResponsePayload) => resolve(payload)
 );
 export const DELETE_MOVIE_FAIL = createActionCreator(
   "DELETE_MOVIE_FAIL",
   (resolve) => (payload: CustomPayload) => resolve(payload)
+);
+
+export const CHANGE_ADMIN_PAGE = createActionCreator(
+  "CHANGE_PAGE",
+  (resolve) => (payload: number) => resolve(payload)
 );

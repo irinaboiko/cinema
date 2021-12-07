@@ -4,8 +4,10 @@ import api from "../../../api/config";
 import { MovieDetailsDto } from "../../MovieDetailsPage/dto/movieDetails.dtos";
 import { MoviesResponseDto } from "../../MoviesPage/dto/movie.dtos";
 
-export const getAdminMovies = (): Promise<AxiosResponse<MoviesResponseDto>> => {
-  return api.get("movie");
+export const getAdminMovies = (
+  page: number
+): Promise<AxiosResponse<MoviesResponseDto>> => {
+  return api.get(`movie?page=${page}`);
 };
 
 export const deleteMovie = (

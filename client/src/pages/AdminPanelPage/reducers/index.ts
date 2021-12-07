@@ -2,15 +2,20 @@ import * as actions from "../actions";
 
 import { IMovie } from "../../MoviesPage/dto/movie.dtos";
 import { createReducer } from "deox";
+import { CHANGE_ADMIN_PAGE } from "../actions";
 
 interface IAdminState {
   moviesList: IMovie[];
+  moviesTotalCount: number;
+  currentPage: number;
   isLoading: boolean;
   errors: null | string;
 }
 
 const defaultState: IAdminState = {
   moviesList: [],
+  moviesTotalCount: 0,
+  currentPage: 1,
   isLoading: false,
   errors: null,
 };
@@ -26,7 +31,8 @@ const adminPageReducer = createReducer(defaultState, (handleAction) => [
   handleAction(actions.GET_ADMIN_MOVIES_SUCCESS, (state, { payload }) => {
     return {
       ...state,
-      moviesList: payload.response,
+      moviesList: payload.response.movies,
+      moviesTotalCount: payload.response.count,
       isLoading: false,
       errors: null,
     };
@@ -39,6 +45,13 @@ const adminPageReducer = createReducer(defaultState, (handleAction) => [
     };
   }),
 
+  handleAction(actions.CHANGE_ADMIN_PAGE, (state, { payload }) => {
+    return {
+      ...state,
+      currentPage: payload,
+    };
+  }),
+
   handleAction(actions.DELETE_MOVIE_REQUEST, (state) => {
     return {
       ...state,
@@ -48,11 +61,14 @@ const adminPageReducer = createReducer(defaultState, (handleAction) => [
   }),
   handleAction(actions.DELETE_MOVIE_SUCCESS, (state, { payload }) => {
     const moviesListCopy = [...state.moviesList];
-    const id = payload;
+    const id = payload.response;
 
-    const updatedMoviesList = moviesListCopy.filter(
-      (movie) => movie._id !== id
-    );
+    const index = moviesListCopy.findIndex((movie) => movie._id == id);
+
+    const updatedMoviesList = [
+      ...moviesListCopy.slice(0, index),
+      ...moviesListCopy.slice(index + 1),
+    ];
 
     return {
       ...state,

@@ -6,7 +6,7 @@ interface MovieResponsePayload extends CustomPayload {}
 
 export const GET_MOVIES_REQUEST = createActionCreator(
   "GET_MOVIES_REQUEST",
-  (resolve) => () => resolve()
+  (resolve) => (payload: number) => resolve(payload)
 );
 export const GET_MOVIES_SUCCESS = createActionCreator(
   "GET_MOVIES_SUCCESS",
@@ -15,4 +15,9 @@ export const GET_MOVIES_SUCCESS = createActionCreator(
 export const GET_MOVIES_FAIL = createActionCreator(
   "GET_MOVIES_FAIL",
   (resolve) => (payload: CustomPayload) => resolve(payload)
+);
+
+export const CHANGE_PAGE = createActionCreator(
+  "CHANGE_PAGE",
+  (resolve) => (payload: number) => resolve(payload)
 );

@@ -2,7 +2,7 @@ import React, { FC, useEffect, useCallback } from "react";
 import { useDispatch } from "react-redux";
 
 import MoviesPageLayout from "../components/MoviesPageLayout";
-import { GET_MOVIES_REQUEST } from "../actions";
+import { CHANGE_PAGE, GET_MOVIES_REQUEST } from "../actions";
 import { useTypedSelector } from "../../../hooks";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "../../../router/routeNames";
@@ -11,11 +11,8 @@ const MoviesPageContainer: FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { moviesList } = useTypedSelector((state) => state.moviesPage);
-
-  useEffect(() => {
-    dispatch(GET_MOVIES_REQUEST());
-  }, [dispatch]);
+  const { moviesList, moviesTotalCount, currentPage, isLoading } =
+    useTypedSelector((state) => state.moviesPage);
 
   const handleGoToMovieDetailsPage = useCallback(
     (id) => {
@@ -24,10 +21,29 @@ const MoviesPageContainer: FC = () => {
     [navigate]
   );
 
+  const pagesCount = Math.ceil(moviesTotalCount / 5);
+
+  const handlePageChange = useCallback(
+    (event, page) => {
+      if (page !== currentPage) {
+        dispatch(CHANGE_PAGE(page));
+      }
+    },
+    [currentPage]
+  );
+
+  useEffect(() => {
+    dispatch(GET_MOVIES_REQUEST(currentPage));
+  }, [dispatch, currentPage]);
+
   return (
     <MoviesPageLayout
       moviesList={moviesList}
+      isLoading={isLoading}
       handleGoToMovieDetailsPage={handleGoToMovieDetailsPage}
+      handlePageChange={handlePageChange}
+      currentPage={currentPage}
+      pagesCount={pagesCount}
     />
   );
 };

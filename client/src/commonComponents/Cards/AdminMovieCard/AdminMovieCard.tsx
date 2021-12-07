@@ -2,13 +2,15 @@ import { Button } from "@material-ui/core";
 import React, { FC } from "react";
 import { IMovie } from "../../../pages/MoviesPage/dto/movie.dtos";
 
-interface AdminMovieCardProps {
+interface AdminMovieCard {
   movie: IMovie;
+  index: number;
   handleDeleteMovie: (id: string) => void;
 }
 
-const AdminMovieCard: FC<AdminMovieCardProps> = ({
+const AdminMovieCard: FC<AdminMovieCard> = ({
   movie,
+  index,
   handleDeleteMovie,
 }) => {
   const imageUrl =
@@ -19,6 +21,7 @@ const AdminMovieCard: FC<AdminMovieCardProps> = ({
   return (
     <div style={{ border: "1px solid black", margin: "10px 0" }}>
       <div>
+        <p>{index + 1}</p>
         {imageUrl && (
           <img style={{ width: "100px" }} src={imageUrl} alt="movie poster" />
         )}
