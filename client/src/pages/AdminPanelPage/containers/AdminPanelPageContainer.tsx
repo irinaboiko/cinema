@@ -4,7 +4,6 @@ import AdminPanelPageLayout from "../components/AdminPanelPageLayout";
 import { useTypedSelector } from "../../../hooks";
 import { useDispatch } from "react-redux";
 import { DELETE_MOVIE_REQUEST, GET_ADMIN_MOVIES_REQUEST } from "../actions";
-import { CHANGE_PAGE } from "../../MoviesPage/actions";
 
 const AdminPanelPageContainer: FC = () => {
   const dispatch = useDispatch();
@@ -13,15 +12,6 @@ const AdminPanelPageContainer: FC = () => {
     useTypedSelector((state) => state.adminPage);
 
   const pagesCount = Math.ceil(moviesTotalCount / 5);
-
-  const handlePageChange = useCallback(
-    (event, page) => {
-      if (page !== currentPage) {
-        dispatch(CHANGE_PAGE(page));
-      }
-    },
-    [currentPage]
-  );
 
   const handleDeleteMovie = useCallback(
     (id: string) => {
@@ -39,7 +29,6 @@ const AdminPanelPageContainer: FC = () => {
     <AdminPanelPageLayout
       moviesList={moviesList}
       isLoading={isLoading}
-      handlePageChange={handlePageChange}
       currentPage={currentPage}
       pagesCount={pagesCount}
       handleDeleteMovie={handleDeleteMovie}

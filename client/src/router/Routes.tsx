@@ -9,12 +9,14 @@ import MoviesPageContainer from "../pages/MoviesPage/containers/MoviesPageContai
 import AdminPanelPageContainer from "../pages/AdminPanelPage/containers/AdminPanelPageContainer";
 import NotFoundPageLayout from "../pages/NotFoundPage/components/NotFoundPageLayout";
 import MovieDetailsPageContainer from "../pages/MovieDetailsPage/containers/MovieDetailsPageContainer";
+import SignUpPageContainer from "../pages/SignUpPage/containers/SignUpPageContainer";
 
 const RoutesComponent: FC = () => {
   return (
     <Routes>
       <Route path="*" element={<NotFoundPageLayout />} />
       <Route path={ROUTES.LOGIN} element={<LoginPageContainer />} />
+      <Route path={ROUTES.SIGNUP} element={<SignUpPageContainer />} />
       <Route
         path={ROUTES.USER}
         element={

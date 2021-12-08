@@ -7,6 +7,8 @@ import {
   withStyles,
 } from "@material-ui/core";
 
+import { Link } from "react-router-dom";
+import { ROUTES } from "../../../router/routeNames";
 import { SignInDto } from "../dto/login.dtos";
 
 import styles from "./styles";
@@ -61,6 +63,10 @@ const LoginPageLayout: FC<ILoginPageLayoutProps> = ({
           {errors && <div style={{ color: "red" }}>{errors}</div>}
         </Box>
       )}
+      <Box>
+        <p>Don't have an account?</p>
+        <Link to={ROUTES.SIGNUP}>Sign Up</Link>
+      </Box>
     </>
   );
 };

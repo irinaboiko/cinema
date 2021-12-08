@@ -1,5 +1,6 @@
 interface IRoutes {
   LOGIN: string;
+  SIGNUP: string;
   USER: string;
   MOVIES: string;
   MOVIES_DETAILS: string;
@@ -8,6 +9,7 @@ interface IRoutes {
 
 export const ROUTES: IRoutes = {
   LOGIN: "/login",
+  SIGNUP: "/signup",
   USER: "/user",
   MOVIES: "/",
   MOVIES_DETAILS: "/movies/:id",

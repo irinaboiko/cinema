@@ -63,7 +63,7 @@ const adminPageReducer = createReducer(defaultState, (handleAction) => [
     const moviesListCopy = [...state.moviesList];
     const id = payload.response;
 
-    const index = moviesListCopy.findIndex((movie) => movie._id == id);
+    const index = moviesListCopy.findIndex((movie) => movie._id === id);
 
     const updatedMoviesList = [
       ...moviesListCopy.slice(0, index),

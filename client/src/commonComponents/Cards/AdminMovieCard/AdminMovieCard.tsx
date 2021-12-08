@@ -2,13 +2,13 @@ import { Button } from "@material-ui/core";
 import React, { FC } from "react";
 import { IMovie } from "../../../pages/MoviesPage/dto/movie.dtos";
 
-interface AdminMovieCard {
+interface AdminMovieCardProps {
   movie: IMovie;
   index: number;
   handleDeleteMovie: (id: string) => void;
 }
 
-const AdminMovieCard: FC<AdminMovieCard> = ({
+const AdminMovieCard: FC<AdminMovieCardProps> = ({
   movie,
   index,
   handleDeleteMovie,

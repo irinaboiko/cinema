@@ -1,13 +1,12 @@
 import { Box, Button, TextField } from "@material-ui/core";
-import React, { ChangeEvent, FC } from "react";
-import AdminMovieCardProps from "../../../commonComponents/Cards/AdminMovieCard/AdminMovieCard";
+import React, { FC } from "react";
 import { IMovie } from "../../MoviesPage/dto/movie.dtos";
-import { Pagination } from "@mui/material";
+import DefaultPagination from "../../../commonComponents/Pagination/DefaultPagination";
+import AdminMovieCard from "../../../commonComponents/Cards/AdminMovieCard/AdminMovieCard";
 
 interface AdminPanelPageLayoutProps {
   moviesList: IMovie[];
   isLoading: boolean;
-  handlePageChange: (event: any, page: number) => void;
   currentPage: number;
   pagesCount: number;
   handleDeleteMovie: (id: string) => void;
@@ -16,7 +15,6 @@ interface AdminPanelPageLayoutProps {
 const AdminPanelPageLayout: FC<AdminPanelPageLayoutProps> = ({
   moviesList,
   isLoading,
-  handlePageChange,
   currentPage,
   pagesCount,
   handleDeleteMovie,
@@ -82,7 +80,7 @@ const AdminPanelPageLayout: FC<AdminPanelPageLayoutProps> = ({
             <div>
               {moviesList.map((movie, index) => {
                 return (
-                  <AdminMovieCardProps
+                  <AdminMovieCard
                     key={movie._id}
                     movie={movie}
                     index={index}
@@ -95,12 +93,7 @@ const AdminPanelPageLayout: FC<AdminPanelPageLayoutProps> = ({
         </div>
       )}
 
-      <Pagination
-        page={currentPage}
-        count={pagesCount}
-        color="secondary"
-        onChange={handlePageChange}
-      />
+      <DefaultPagination currentPage={currentPage} pagesCount={pagesCount} />
     </>
   );
 };
