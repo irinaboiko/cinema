@@ -6,5 +6,5 @@ import { SignUpDto, SignUpResponseDTO } from "../dto/signUp.dtos";
 export const signUp = (
   body: SignUpDto
 ): Promise<AxiosResponse<SignUpResponseDTO>> => {
-  return api.post("api", body);
+  return api.post("auth/signup", body);
 };

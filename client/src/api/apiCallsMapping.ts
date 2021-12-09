@@ -3,6 +3,9 @@ import { AxiosResponse } from "axios";
 import * as loginPageActions from "../pages/LoginPage/actions";
 import * as loginPageAPI from "../pages/LoginPage/api";
 
+import * as signUpPageActions from "../pages/SignUpPage/actions";
+import * as signUpPageAPI from "../pages/SignUpPage/api";
+
 import * as moviesPageActions from "../pages/MoviesPage/actions";
 import * as moviesPageAPI from "../pages/MoviesPage/api";
 
@@ -21,6 +24,8 @@ type ActionRequestMapping = {
 const apiCallsMapping = (actionType: string): RequestFunctionType => {
   const mapping: ActionRequestMapping = {
     [loginPageActions.LOGIN_REQUEST.type]: loginPageAPI.signIn,
+
+    [signUpPageActions.SIGN_UP_REQUEST.type]: signUpPageAPI.signUp,
 
     [moviesPageActions.GET_MOVIES_REQUEST.type]: moviesPageAPI.getMovies,
 

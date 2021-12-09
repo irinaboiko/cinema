@@ -61,12 +61,12 @@ const LoginPageLayout: FC<ILoginPageLayoutProps> = ({
             </Box>
           </form>
           {errors && <div style={{ color: "red" }}>{errors}</div>}
+          <Box>
+            <p>Don't have an account?</p>
+            <Link to={ROUTES.SIGNUP}>Sign Up</Link>
+          </Box>
         </Box>
       )}
-      <Box>
-        <p>Don't have an account?</p>
-        <Link to={ROUTES.SIGNUP}>Sign Up</Link>
-      </Box>
     </>
   );
 };

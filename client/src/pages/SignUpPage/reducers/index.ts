@@ -28,7 +28,7 @@ const signUpReducer = createReducer(defaultState, (handleAction) => [
     return {
       ...state,
       isLoading: false,
-      successMessage: payload.response,
+      successMessage: payload.response.message,
       isShowModal: true,
       errors: null,
     };
