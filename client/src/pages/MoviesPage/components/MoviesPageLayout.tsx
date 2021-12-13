@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { ChangeEvent, FC } from "react";
 
 import { IMovie } from "../dto/movie.dtos";
 import MovieCard from "../../../commonComponents/Cards/MovieCard";
@@ -10,6 +10,7 @@ interface MoviesPageLayoutProps {
   handleGoToMovieDetailsPage: (id: string) => void;
   currentPage: number;
   pagesCount: number;
+  handlePageChange: (event: ChangeEvent<unknown>, page: number) => void;
 }
 
 const MoviesPageLayout: FC<MoviesPageLayoutProps> = ({
@@ -18,6 +19,7 @@ const MoviesPageLayout: FC<MoviesPageLayoutProps> = ({
   handleGoToMovieDetailsPage,
   currentPage,
   pagesCount,
+  handlePageChange,
 }) => {
   return (
     <>
@@ -38,6 +40,7 @@ const MoviesPageLayout: FC<MoviesPageLayoutProps> = ({
           <DefaultPagination
             currentPage={currentPage}
             pagesCount={pagesCount}
+            handlePageChange={handlePageChange}
           />
         </div>
       )}

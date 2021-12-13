@@ -45,7 +45,7 @@ const addMovieController = async (req, res) => {
 
     await movie.save();
 
-    res.status(201).json(movie);
+    res.status(201).json({ message: "Movie saved successfully", movie });
   } catch (error) {
     res.status(500).json({ message: `${error}, Something went wrong...` });
   }

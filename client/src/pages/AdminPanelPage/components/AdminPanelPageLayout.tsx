@@ -1,8 +1,9 @@
 import { Box, Button, TextField } from "@material-ui/core";
-import React, { FC } from "react";
+import React, { ChangeEvent, FC, FormEvent } from "react";
 import { IMovie } from "../../MoviesPage/dto/movie.dtos";
 import DefaultPagination from "../../../commonComponents/Pagination/DefaultPagination";
 import AdminMovieCard from "../../../commonComponents/Cards/AdminMovieCard/AdminMovieCard";
+import { addMovieRequestDto } from "../dto/adminPage.dtos";
 
 interface AdminPanelPageLayoutProps {
   moviesList: IMovie[];
@@ -10,6 +11,12 @@ interface AdminPanelPageLayoutProps {
   currentPage: number;
   pagesCount: number;
   handleDeleteMovie: (id: string) => void;
+  handlePageChange: (event: ChangeEvent<unknown>, page: number) => void;
+  formValues: addMovieRequestDto;
+  handleInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  handleSubmit: (e: FormEvent<HTMLFormElement>) => void;
+  selectedFile?: any;
+  setSelectedFile?: any;
 }
 
 const AdminPanelPageLayout: FC<AdminPanelPageLayoutProps> = ({
@@ -18,6 +25,12 @@ const AdminPanelPageLayout: FC<AdminPanelPageLayoutProps> = ({
   currentPage,
   pagesCount,
   handleDeleteMovie,
+  handlePageChange,
+  formValues,
+  handleInputChange,
+  handleSubmit,
+  selectedFile,
+  setSelectedFile,
 }) => {
   return (
     <>
@@ -30,19 +43,41 @@ const AdminPanelPageLayout: FC<AdminPanelPageLayoutProps> = ({
               variant="outlined"
               color="primary"
               onClick={() => console.log("ADD NEW MOVIE!!!")}
+              style={{ marginBottom: "10px" }}
             >
               Add new movie
             </Button>
             <div>
-              <form>
+              <form onSubmit={handleSubmit}>
                 <Box>
-                  <TextField name="name" type="text" placeholder="Name" />
+                  <TextField
+                    name="name"
+                    type="text"
+                    placeholder="Name"
+                    value={formValues.name}
+                    onChange={handleInputChange}
+                  />
                 </Box>
                 <Box>
-                  <TextField name="image" type="file" />
+                  <TextField
+                    name="image"
+                    type="file"
+                    value={selectedFile}
+                    onChange={(event) =>
+                      setSelectedFile(
+                        (event.target as HTMLInputElement).files[0]
+                      )
+                    }
+                  />
                 </Box>
                 <Box>
-                  <TextField name="genre" type="text" placeholder="Genre" />
+                  <TextField
+                    name="genre"
+                    type="text"
+                    placeholder="Genre"
+                    value={formValues.genre}
+                    onChange={handleInputChange}
+                  />
                 </Box>
                 <Box>
                   <TextField
@@ -52,16 +87,26 @@ const AdminPanelPageLayout: FC<AdminPanelPageLayoutProps> = ({
                     style={{ width: 500 }}
                     multiline
                     rows={6}
+                    value={formValues.description}
+                    onChange={handleInputChange}
                   />
                 </Box>
                 <Box>
-                  <TextField name="runtime" type="text" placeholder="Runtime" />
+                  <TextField
+                    name="runtime"
+                    type="text"
+                    placeholder="Runtime"
+                    value={formValues.runtime}
+                    onChange={handleInputChange}
+                  />
                 </Box>
                 <Box>
                   <TextField
                     name="age_rating"
                     type="text"
                     placeholder="Age Rating"
+                    value={formValues.age_rating}
+                    onChange={handleInputChange}
                   />
                 </Box>
                 <Box>
@@ -69,10 +114,28 @@ const AdminPanelPageLayout: FC<AdminPanelPageLayoutProps> = ({
                     name="released"
                     type="text"
                     placeholder="Released"
+                    value={formValues.released}
+                    onChange={handleInputChange}
                   />
                 </Box>
                 <Box>
-                  <TextField name="country" type="text" placeholder="Country" />
+                  <TextField
+                    name="country"
+                    type="text"
+                    placeholder="Country"
+                    value={formValues.country}
+                    onChange={handleInputChange}
+                  />
+                </Box>
+                <Box>
+                  <Button
+                    type="submit"
+                    variant="outlined"
+                    color="primary"
+                    style={{ marginTop: "10px" }}
+                  >
+                    Create movie
+                  </Button>
                 </Box>
               </form>
             </div>
@@ -90,10 +153,13 @@ const AdminPanelPageLayout: FC<AdminPanelPageLayoutProps> = ({
               })}
             </div>
           </div>
+          <DefaultPagination
+            currentPage={currentPage}
+            pagesCount={pagesCount}
+            handlePageChange={handlePageChange}
+          />
         </div>
       )}
-
-      <DefaultPagination currentPage={currentPage} pagesCount={pagesCount} />
     </>
   );
 };

@@ -1,29 +1,17 @@
-import React, { FC, useCallback } from "react";
-import { useDispatch } from "react-redux";
+import React, { ChangeEvent, FC } from "react";
 import { Pagination } from "@mui/material";
-
-import { CHANGE_PAGE } from "../../../pages/MoviesPage/actions";
 
 interface DefaultPaginationProps {
   currentPage: number;
   pagesCount: number;
+  handlePageChange: (event: ChangeEvent<unknown>, page: number) => void;
 }
 
 const DefaultPagination: FC<DefaultPaginationProps> = ({
   currentPage,
   pagesCount,
+  handlePageChange,
 }) => {
-  const dispatch = useDispatch();
-
-  const handlePageChange = useCallback(
-    (event, page) => {
-      if (page !== currentPage) {
-        dispatch(CHANGE_PAGE(page));
-      }
-    },
-    [dispatch, currentPage]
-  );
-
   return (
     <Pagination
       page={currentPage}

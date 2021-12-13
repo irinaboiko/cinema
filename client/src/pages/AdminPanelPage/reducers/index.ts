@@ -2,13 +2,13 @@ import * as actions from "../actions";
 
 import { IMovie } from "../../MoviesPage/dto/movie.dtos";
 import { createReducer } from "deox";
-import { CHANGE_ADMIN_PAGE } from "../actions";
 
 interface IAdminState {
   moviesList: IMovie[];
   moviesTotalCount: number;
   currentPage: number;
   isLoading: boolean;
+  successMessage: string;
   errors: null | string;
 }
 
@@ -17,6 +17,7 @@ const defaultState: IAdminState = {
   moviesTotalCount: 0,
   currentPage: 1,
   isLoading: false,
+  successMessage: "",
   errors: null,
 };
 
@@ -45,10 +46,36 @@ const adminPageReducer = createReducer(defaultState, (handleAction) => [
     };
   }),
 
-  handleAction(actions.CHANGE_ADMIN_PAGE, (state, { payload }) => {
+  handleAction(actions.ADD_MOVIE_REQUEST, (state) => {
     return {
       ...state,
-      currentPage: payload,
+      isLoading: true,
+      errors: null,
+    };
+  }),
+  handleAction(actions.ADD_MOVIE_SUCCESS, (state, { payload }) => {
+    /*const moviesListCopy = [...state.moviesList];
+    const id = payload.response;
+
+    const index = moviesListCopy.findIndex((movie) => movie._id === id);
+
+    const updatedMoviesList = [
+      ...moviesListCopy.slice(0, index),
+      ...moviesListCopy.slice(index + 1),
+    ];*/
+
+    return {
+      ...state,
+      successMessage: payload.response.message,
+      isLoading: false,
+      errors: null,
+    };
+  }),
+  handleAction(actions.ADD_MOVIE_FAIL, (state, { payload }) => {
+    return {
+      ...state,
+      isLoading: false,
+      errors: payload.response,
     };
   }),
 
@@ -82,6 +109,13 @@ const adminPageReducer = createReducer(defaultState, (handleAction) => [
       ...state,
       isLoading: false,
       errors: payload.response,
+    };
+  }),
+
+  handleAction(actions.CHANGE_ADMIN_PAGE, (state, { payload }) => {
+    return {
+      ...state,
+      currentPage: payload,
     };
   }),
 ]);
