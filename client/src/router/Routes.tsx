@@ -10,6 +10,7 @@ import AdminPanelPageContainer from "../pages/AdminPanelPage/containers/AdminPan
 import NotFoundPageLayout from "../pages/NotFoundPage/components/NotFoundPageLayout";
 import MovieDetailsPageContainer from "../pages/MovieDetailsPage/containers/MovieDetailsPageContainer";
 import SignUpPageContainer from "../pages/SignUpPage/containers/SignUpPageContainer";
+import AdminAddMovieContainer from "../pages/AdminAddMoviePage/containers/AdminAddMovieContainer";
 
 const RoutesComponent: FC = () => {
   return (
@@ -46,6 +47,14 @@ const RoutesComponent: FC = () => {
         element={
           <PrivateRoute>
             <AdminPanelPageContainer />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path={ROUTES.ADMIN_ADD_MOVIE}
+        element={
+          <PrivateRoute>
+            <AdminAddMovieContainer />
           </PrivateRoute>
         }
       />

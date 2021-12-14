@@ -86,7 +86,7 @@ const SignUpPageLayout: FC<SignUpPageLayoutProps> = ({
                 padding: "20px",
               }}
             >
-              <p>Your account was created</p>
+              <p>{successMessage}</p>
               <Link to={ROUTES.LOGIN}>Log In</Link>
             </Box>
           </Modal>

@@ -34,6 +34,7 @@ const apiCallsMapping = (actionType: string): RequestFunctionType => {
 
     [adminPageAction.GET_ADMIN_MOVIES_REQUEST.type]:
       adminPageAPI.getAdminMovies,
+    [adminPageAction.ADD_MOVIE_REQUEST.type]: adminPageAPI.addMovie,
     [adminPageAction.DELETE_MOVIE_REQUEST.type]: adminPageAPI.deleteMovie,
   };
 

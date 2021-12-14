@@ -5,6 +5,7 @@ interface IRoutes {
   MOVIES: string;
   MOVIES_DETAILS: string;
   ADMIN: string;
+  ADMIN_ADD_MOVIE: string;
 }
 
 export const ROUTES: IRoutes = {
@@ -14,4 +15,5 @@ export const ROUTES: IRoutes = {
   MOVIES: "/",
   MOVIES_DETAILS: "/movies/:id",
   ADMIN: "/admin",
+  ADMIN_ADD_MOVIE: "/addMovie",
 };

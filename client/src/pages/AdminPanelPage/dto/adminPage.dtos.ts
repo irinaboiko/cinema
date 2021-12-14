@@ -8,3 +8,7 @@ export interface addMovieRequestDto {
   released: string;
   country: string;
 }
+
+export interface AddMovieResponseDTO {
+  successMessage: string;
+}

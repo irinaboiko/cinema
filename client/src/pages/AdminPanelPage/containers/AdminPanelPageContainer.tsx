@@ -1,29 +1,23 @@
-import React, { FC, useCallback, useEffect, useState } from "react";
+import React, { FC, useCallback, useEffect } from "react";
 
 import AdminPanelPageLayout from "../components/AdminPanelPageLayout";
-import { useForm, useTypedSelector } from "../../../hooks";
+import { useTypedSelector } from "../../../hooks";
 import { useDispatch } from "react-redux";
 import {
   CHANGE_ADMIN_PAGE,
   DELETE_MOVIE_REQUEST,
   GET_ADMIN_MOVIES_REQUEST,
 } from "../actions";
-import { addMovieRequestDto } from "../dto/adminPage.dtos";
+
+/*interface IFile {
+  name: string;
+  type: string;
+}*/
 
 const AdminPanelPageContainer: FC = () => {
   const dispatch = useDispatch();
 
-  const [selectedFile, setSelectedFile] = useState(null);
-
-  const { formValues, handleInputChange } = useForm<addMovieRequestDto>({
-    name: "",
-    genre: "",
-    description: "",
-    runtime: "",
-    age_rating: "",
-    released: "",
-    country: "",
-  });
+  //const [selectedFile, setSelectedFile] = useState<IFile[]>([]);
 
   const { moviesList, moviesTotalCount, currentPage, isLoading } =
     useTypedSelector((state) => state.adminPage);
@@ -47,15 +41,26 @@ const AdminPanelPageContainer: FC = () => {
     [dispatch, currentPage]
   );
 
-  const handleSubmit = useCallback(
-    (event) => {
+  /*const handleFileInputChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
       event.preventDefault();
-      //console.log(formValues);
-      console.log(selectedFile);
-      //dispatch(LOGIN_REQUEST(formValues));
+      console.log(event.target.files);
+      const files: FileList | null = event.target!.files;
+      setSelectedFile(event.target!.files[0]!);
     },
-    [dispatch, formValues, selectedFile]
-  );
+    [selectedFile]
+  );*/
+
+  /*const handleFileInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    console.log("file: ", file);
+    setSelectedFile([...])
+  }*/
+
+  /*const handleFileInputChange = (files: IFile[]) => {
+    setSelectedFile((currentFiles) => {
+      return [files[0]];
+    });
+  };*/
 
   useEffect(() => {
     dispatch(GET_ADMIN_MOVIES_REQUEST(currentPage));
@@ -69,11 +74,9 @@ const AdminPanelPageContainer: FC = () => {
       pagesCount={pagesCount}
       handleDeleteMovie={handleDeleteMovie}
       handlePageChange={handlePageChange}
-      formValues={formValues}
-      handleInputChange={handleInputChange}
-      handleSubmit={handleSubmit}
-      selectedFile={selectedFile}
-      setSelectedFile={setSelectedFile}
+      //selectedFile={selectedFile}
+      //setSelectedFile={setSelectedFile}
+      //handleFileInputChange={handleFileInputChange}
     />
   );
 };

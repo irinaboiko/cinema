@@ -1,17 +1,16 @@
 import { Button } from "@material-ui/core";
 import React, { FC } from "react";
 import { IMovie } from "../../MoviesPage/dto/movie.dtos";
+import BackButton from "../../../commonComponents/Buttons/BackButton/BackButton";
 
 interface MovieDetailsPageLayoutProps {
   movieInfo: IMovie;
   isLoading: boolean;
-  handleOnBackButtonClick: () => void;
 }
 
 const MovieDetailsPageLayout: FC<MovieDetailsPageLayoutProps> = ({
   movieInfo,
   isLoading,
-  handleOnBackButtonClick,
 }) => {
   const imageUrl =
     process.env.REACT_APP_API_URL && movieInfo.image
@@ -24,14 +23,7 @@ const MovieDetailsPageLayout: FC<MovieDetailsPageLayoutProps> = ({
         <div>Loading...</div>
       ) : (
         <div style={{ padding: 20 }}>
-          <Button
-            variant="outlined"
-            color="primary"
-            onClick={handleOnBackButtonClick}
-            style={{ marginBottom: 5 }}
-          >
-            Back
-          </Button>
+          <BackButton />
           {imageUrl && (
             <div>
               <img

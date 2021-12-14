@@ -48,3 +48,8 @@ export const CHANGE_ADMIN_PAGE = createActionCreator(
   "CHANGE_PAGE",
   (resolve) => (payload: number) => resolve(payload)
 );
+
+export const CLOSE_MODAL = createActionCreator(
+  "CLOSE_MODAL",
+  (resolve) => () => resolve()
+);

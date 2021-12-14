@@ -8,6 +8,7 @@ interface IAdminState {
   moviesTotalCount: number;
   currentPage: number;
   isLoading: boolean;
+  isShowModal: boolean;
   successMessage: string;
   errors: null | string;
 }
@@ -18,6 +19,7 @@ const defaultState: IAdminState = {
   currentPage: 1,
   isLoading: false,
   successMessage: "",
+  isShowModal: false,
   errors: null,
 };
 
@@ -68,6 +70,7 @@ const adminPageReducer = createReducer(defaultState, (handleAction) => [
       ...state,
       successMessage: payload.response.message,
       isLoading: false,
+      isShowModal: true,
       errors: null,
     };
   }),
@@ -116,6 +119,15 @@ const adminPageReducer = createReducer(defaultState, (handleAction) => [
     return {
       ...state,
       currentPage: payload,
+    };
+  }),
+
+  handleAction(actions.CLOSE_MODAL, (state) => {
+    return {
+      ...state,
+      isLoading: false,
+      isShowModal: false,
+      successMessage: "",
     };
   }),
 ]);

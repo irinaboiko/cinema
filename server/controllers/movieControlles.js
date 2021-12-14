@@ -9,6 +9,7 @@ const getAllMoviesController = async (req, res) => {
   try {
     const movies = await Movie.find()
       .sort({ name: 1 })
+      .collation({ locale: "en_US", numericOrdering: true })
       .skip(skip)
       .limit(Number(limit));
 
@@ -28,9 +29,9 @@ const addMovieController = async (req, res) => {
     const { name, genre, description, runtime, age_rating, released, country } =
       req.body;
 
-    const { image } = req.files;
-    const fileName = `${uuid.v4()}.jpg`;
-    image.mv(path.resolve(__dirname, "..", "static", fileName));
+    const image = req.files ? req.files.image : null;
+    const fileName = image ? `${uuid.v4()}.jpg` : null;
+    image?.mv(path.resolve(__dirname, "..", "static", fileName));
 
     const movie = new Movie({
       name,
