@@ -2,6 +2,7 @@ import { ChangeEvent, useCallback, useState } from "react";
 
 interface IForm<T> {
   formValues: T;
+  setFormValues: any;
   handleInputChange: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
@@ -17,7 +18,7 @@ function useForm<T>(initialValues: T): IForm<T> {
     []
   );
 
-  return { formValues, handleInputChange };
+  return { formValues, setFormValues, handleInputChange };
 }
 
 export default useForm;

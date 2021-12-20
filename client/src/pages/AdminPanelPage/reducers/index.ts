@@ -1,15 +1,13 @@
-import * as actions from "../actions";
-
-import { IMovie } from "../../MoviesPage/dto/movie.dtos";
 import { createReducer } from "deox";
+
+import * as actions from "../actions";
+import { IMovie } from "../../MoviesPage/dto/movie.dtos";
 
 interface IAdminState {
   moviesList: IMovie[];
   moviesTotalCount: number;
   currentPage: number;
   isLoading: boolean;
-  isShowModal: boolean;
-  successMessage: string;
   errors: null | string;
 }
 
@@ -18,8 +16,6 @@ const defaultState: IAdminState = {
   moviesTotalCount: 0,
   currentPage: 1,
   isLoading: false,
-  successMessage: "",
-  isShowModal: false,
   errors: null,
 };
 
@@ -41,40 +37,6 @@ const adminPageReducer = createReducer(defaultState, (handleAction) => [
     };
   }),
   handleAction(actions.GET_ADMIN_MOVIES_FAIL, (state, { payload }) => {
-    return {
-      ...state,
-      isLoading: false,
-      errors: payload.response,
-    };
-  }),
-
-  handleAction(actions.ADD_MOVIE_REQUEST, (state) => {
-    return {
-      ...state,
-      isLoading: true,
-      errors: null,
-    };
-  }),
-  handleAction(actions.ADD_MOVIE_SUCCESS, (state, { payload }) => {
-    /*const moviesListCopy = [...state.moviesList];
-    const id = payload.response;
-
-    const index = moviesListCopy.findIndex((movie) => movie._id === id);
-
-    const updatedMoviesList = [
-      ...moviesListCopy.slice(0, index),
-      ...moviesListCopy.slice(index + 1),
-    ];*/
-
-    return {
-      ...state,
-      successMessage: payload.response.message,
-      isLoading: false,
-      isShowModal: true,
-      errors: null,
-    };
-  }),
-  handleAction(actions.ADD_MOVIE_FAIL, (state, { payload }) => {
     return {
       ...state,
       isLoading: false,
@@ -119,15 +81,6 @@ const adminPageReducer = createReducer(defaultState, (handleAction) => [
     return {
       ...state,
       currentPage: payload,
-    };
-  }),
-
-  handleAction(actions.CLOSE_MODAL, (state) => {
-    return {
-      ...state,
-      isLoading: false,
-      isShowModal: false,
-      successMessage: "",
     };
   }),
 ]);

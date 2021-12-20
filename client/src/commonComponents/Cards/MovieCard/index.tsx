@@ -38,10 +38,10 @@ const MovieCard: FC<MovieCardProps> = ({
       <p>{movieInfo.name}</p>
       <p>{movieInfo.description}</p>
       <Box>
-        <Button>
+        <Button onClick={(event) => event.stopPropagation()}>
           {isFavorite ? <FavoriteIcon /> : <FavoriteBorderIcon />}
         </Button>
-        <Button>
+        <Button onClick={(event) => event.stopPropagation()}>
           {isWatchLater ? <BookmarkBorder /> : <BookmarkBorderIcon />}
         </Button>
       </Box>

@@ -15,6 +15,9 @@ import * as movieDetailsAPI from "../pages/MovieDetailsPage/api";
 import * as adminPageAction from "../pages/AdminPanelPage/actions";
 import * as adminPageAPI from "../pages/AdminPanelPage/api";
 
+import * as adminAddMoviePageActions from "../pages/AdminAddMoviePage/actions";
+import * as adminAddMoviePageAPI from "../pages/AdminAddMoviePage/api";
+
 type RequestFunctionType = (body: any) => Promise<AxiosResponse>;
 
 type ActionRequestMapping = {
@@ -34,8 +37,10 @@ const apiCallsMapping = (actionType: string): RequestFunctionType => {
 
     [adminPageAction.GET_ADMIN_MOVIES_REQUEST.type]:
       adminPageAPI.getAdminMovies,
-    [adminPageAction.ADD_MOVIE_REQUEST.type]: adminPageAPI.addMovie,
     [adminPageAction.DELETE_MOVIE_REQUEST.type]: adminPageAPI.deleteMovie,
+
+    [adminAddMoviePageActions.ADD_MOVIE_REQUEST.type]:
+      adminAddMoviePageAPI.addMovie,
   };
 
   if (!mapping[actionType]) {

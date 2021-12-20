@@ -3,23 +3,24 @@ import AdminAddMovieLayout from "../components/AdminAddMovieLayout";
 import { useDispatch } from "react-redux";
 import { useForm, useTypedSelector } from "../../../hooks";
 import { addMovieRequestDto } from "../../AdminPanelPage/dto/adminPage.dtos";
-import { ADD_MOVIE_REQUEST, CLOSE_MODAL } from "../../AdminPanelPage/actions";
+import { ADD_MOVIE_REQUEST, CLOSE_MODAL } from "../actions";
 
 const AdminAddMovieContainer = () => {
   const dispatch = useDispatch();
 
-  const { formValues, handleInputChange } = useForm<addMovieRequestDto>({
-    name: "",
-    genre: "",
-    description: "",
-    runtime: "",
-    age_rating: "",
-    released: "",
-    country: "",
-  });
+  const { formValues, setFormValues, handleInputChange } =
+    useForm<addMovieRequestDto>({
+      name: "",
+      genre: "",
+      description: "",
+      runtime: "",
+      age_rating: "",
+      released: "",
+      country: "",
+    });
 
   const { isLoading, isShowModal, successMessage } = useTypedSelector(
-    (state) => state.adminPage
+    (state) => state.adminAddMoviePage
   );
 
   const handleSubmit = useCallback(
@@ -27,6 +28,15 @@ const AdminAddMovieContainer = () => {
       event.preventDefault();
       //console.log(selectedFile);
       dispatch(ADD_MOVIE_REQUEST(formValues));
+      setFormValues({
+        name: "",
+        genre: "",
+        description: "",
+        runtime: "",
+        age_rating: "",
+        released: "",
+        country: "",
+      });
     },
     [dispatch, formValues]
   );

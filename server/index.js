@@ -18,6 +18,7 @@ app.use(fileUpload({}));
 const authRoutes = require("./routes/authRouts");
 const userRoutes = require("./routes/userRouts");
 const movieRoutes = require("./routes/movieRouts");
+const userMovieRoutes = require("./routes/userMovieRouts");
 
 //Add Middleware
 app.use(express.json());
@@ -27,6 +28,7 @@ app.use(express.urlencoded());
 app.use("/api/auth", authRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/movie", movieRoutes);
+app.use("/api/userMovie", userMovieRoutes);
 
 //Connect to Mongo DB and start app
 const start = async () => {

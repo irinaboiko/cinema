@@ -5,13 +5,15 @@ const Schema = mongoose.Schema;
 
 const userMovieSchema = new Schema({
   user_id: {
-    type: mongoose.SchemaType.ObjectId,
-    ref: User,
+    //type: mongoose.SchemaType.ObjectId,
+    //ref: User,
+    type: String,
     required: true,
   },
   movie_id: {
-    type: mongoose.SchemaType.ObjectId,
-    ref: Movie,
+    //type: mongoose.SchemaType.ObjectId,
+    //ref: Movie,
+    type: String,
     required: true,
   },
   user_rating: Number,
