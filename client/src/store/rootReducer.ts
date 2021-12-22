@@ -6,6 +6,7 @@ import movieDetailsPageReducer from "../pages/MovieDetailsPage/reducers";
 import adminPageReducer from "../pages/AdminPanelPage/reducers";
 import signUpReducer from "../pages/SignUpPage/reducers";
 import adminAddMoviePageReducer from "../pages/AdminAddMoviePage/reducers";
+import userPageReducer from "../pages/UserPage/reducers";
 
 export const rootReducer = combineReducers({
   auth: loginReducer,
@@ -14,6 +15,7 @@ export const rootReducer = combineReducers({
   movieDetailsPage: movieDetailsPageReducer,
   adminPage: adminPageReducer,
   adminAddMoviePage: adminAddMoviePageReducer,
+  userPage: userPageReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

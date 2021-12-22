@@ -1,23 +1,23 @@
 const UserMovie = require("../models/userMovieModel");
 
-const getUserFavouriteMovies = async (req, res) => {
-  const { userId } = req.body;
+const getUserMoviesCollection = async (req, res) => {
+  const { userId, option } = req.body;
 
   try {
-    const movies = await UserMovie.find({
+    const moviesCollection = await UserMovie.find({
       user_id: userId,
-      is_favorite: true,
+      [option]: true,
     });
 
-    res.status(201).json(movies);
+    res.status(201).json(moviesCollection);
   } catch (error) {
     res.status(500).json({ message: `${error}, Something went wrong...` });
   }
 };
 
-const updateMovieFavorite = async (req, res) => {
-  const { userId, movieId, isFavorite } = req.body;
-  const isFavoriteBoolean = isFavorite === "true";
+const updateUserMovieDetails = async (req, res) => {
+  const { userId, movieId, option, value } = req.body;
+  const valueBoolean = value === "true";
 
   try {
     const userMovie = await UserMovie.findOne({
@@ -29,23 +29,21 @@ const updateMovieFavorite = async (req, res) => {
       const userMovieToCreate = new UserMovie({
         user_id: userId,
         movie_id: movieId,
-        is_favorite: isFavoriteBoolean,
+        [option]: valueBoolean,
       });
 
       await userMovieToCreate.save();
     } else {
       await UserMovie.updateOne(
         { user_id: userId, movie_id: movieId },
-        { $set: { is_favorite: isFavoriteBoolean } }
+        { $set: { [option]: valueBoolean } }
       );
     }
 
-    const responseMessagePlaceholder = isFavoriteBoolean
-      ? "added to"
-      : "removed from";
+    const responseMessagePlaceholder = valueBoolean ? "were" : "were not";
 
     res.status(201).json({
-      message: `The movie was ${responseMessagePlaceholder} favourites`,
+      message: `The movie details ${responseMessagePlaceholder} updated`,
     });
   } catch (error) {
     res.status(500).json({ message: `${error}, Something went wrong...` });
@@ -53,6 +51,6 @@ const updateMovieFavorite = async (req, res) => {
 };
 
 module.exports = {
-  getUserFavouriteMovies,
-  updateMovieFavorite,
+  getUserMoviesCollection,
+  updateUserMovieDetails,
 };

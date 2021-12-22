@@ -1,14 +1,14 @@
 const { Router } = require("express");
 const router = Router();
 const {
-  getUserFavouriteMovies,
-  updateMovieFavorite,
+  getUserMoviesCollection,
+  updateUserMovieDetails,
 } = require("../controllers/userMovieControllers");
 
-// api/userMovie/favourite
-router.get("/favourite", getUserFavouriteMovies);
+// api/userMovie/
+router.get("/", getUserMoviesCollection);
 
-// api/userMovie/favourite
-router.post("/favourite", updateMovieFavorite);
+// api/userMovie/
+router.post("/", updateUserMovieDetails);
 
 module.exports = router;
