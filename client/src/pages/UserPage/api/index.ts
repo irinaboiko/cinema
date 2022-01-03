@@ -1,14 +1,14 @@
 import { AxiosResponse } from "axios";
 
 import {
-  //getUserMoviesCollectionRequestDto,
+  getUserMoviesCollectionRequestDto,
   UserMoviesCollectionResponseDto,
 } from "../dto/user.dtos";
 import api from "../../../api/config";
 
 export const getUserMoviesCollection = (
-  //body: getUserMoviesCollectionRequestDto
-  body: any
+  body: getUserMoviesCollectionRequestDto
 ): Promise<AxiosResponse<UserMoviesCollectionResponseDto>> => {
-  return api.get("userMovie", body);
+  const { userId, option } = body;
+  return api.get(`userMovie/?userId=${userId}&option=${option}`);
 };

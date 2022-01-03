@@ -1,42 +1,72 @@
 import React, { FC, SyntheticEvent, useState } from "react";
-import { UserDto } from "../dto/user.dtos";
+import { TabValues, UserDto } from "../dto/user.dtos";
 import UserCard from "../../../commonComponents/Cards/UserCard";
 import { Box } from "@material-ui/core";
 import { Tab } from "@mui/material";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
-
-export enum TabValues {
-  isFavorite = "is_favorite",
-  isWatchLater = "is_watch_later",
-  isWatched = "is_watched",
-}
+import { IMovie } from "../../MoviesPage/dto/movie.dtos";
+import MovieCard from "../../../commonComponents/Cards/MovieCard";
+import UserMovieCard from "../../../commonComponents/Cards/UserMovieCard";
 
 interface ILoginPageLayoutProps {
   userInfo: UserDto;
+  tabValue: string;
+  //handleTabChange: (event: SyntheticEvent, newTabValue: TabValues) => void;
+  handleTabChange: any;
+  moviesCollectionList: IMovie[];
 }
 
-const UserPageLayout: FC<ILoginPageLayoutProps> = ({ userInfo }) => {
-  const [value, setValue] = useState<TabValues>(TabValues.isFavorite);
-
-  const handleChange = (event: SyntheticEvent, newValue: TabValues) => {
-    setValue(newValue);
-  };
-
+const UserPageLayout: FC<ILoginPageLayoutProps> = ({
+  userInfo,
+  tabValue,
+  handleTabChange,
+  moviesCollectionList,
+}) => {
   return (
     <div style={{ padding: 20 }}>
       <UserCard userInfo={userInfo} />
       <Box style={{ marginBottom: 20 }}>
-        <TabContext value={value}>
+        <TabContext value={tabValue}>
           <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-            <TabList onChange={handleChange} variant="fullWidth">
+            <TabList onChange={handleTabChange} variant="fullWidth">
               <Tab label="Favorites" value={TabValues.isFavorite} />
               <Tab label="Watch Later" value={TabValues.isWatchLater} />
               <Tab label="Watched" value={TabValues.isWatched} />
             </TabList>
           </Box>
-          <TabPanel value={TabValues.isFavorite}>Favorites</TabPanel>
-          <TabPanel value={TabValues.isWatchLater}>Watch Later</TabPanel>
-          <TabPanel value={TabValues.isWatched}>Watched</TabPanel>
+          <TabPanel value={TabValues.isFavorite}>
+            <div>
+              {moviesCollectionList.length > 0 ? (
+                moviesCollectionList.map((movie) => {
+                  return <UserMovieCard movie={movie} key={movie._id} />;
+                })
+              ) : (
+                <p>There are no any movies</p>
+              )}
+            </div>
+          </TabPanel>
+          <TabPanel value={TabValues.isWatchLater}>
+            <div>
+              {moviesCollectionList.length > 0 ? (
+                moviesCollectionList.map((movie) => {
+                  return <UserMovieCard movie={movie} key={movie._id} />;
+                })
+              ) : (
+                <p>There are no any movies</p>
+              )}
+            </div>
+          </TabPanel>
+          <TabPanel value={TabValues.isWatched}>
+            <div>
+              {moviesCollectionList.length > 0 ? (
+                moviesCollectionList.map((movie) => {
+                  return <UserMovieCard movie={movie} key={movie._id} />;
+                })
+              ) : (
+                <p>There are no any movies</p>
+              )}
+            </div>
+          </TabPanel>
         </TabContext>
       </Box>
     </div>

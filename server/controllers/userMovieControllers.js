@@ -1,13 +1,22 @@
+const mongoose = require("mongoose");
+
 const UserMovie = require("../models/userMovieModel");
+const Movie = require("../models/movieModel");
 
 const getUserMoviesCollection = async (req, res) => {
-  const { userId, option } = req.body;
+  const { userId, option } = req.query;
 
   try {
-    const moviesCollection = await UserMovie.find({
+    const userMovies = await UserMovie.find({
       user_id: userId,
       [option]: true,
     });
+
+    const userMoviesIds = userMovies.map((userMovie) => {
+      return userMovie.movie_id;
+    });
+
+    const moviesCollection = await Movie.find({ _id: { $in: userMoviesIds } });
 
     res.status(201).json(moviesCollection);
   } catch (error) {

@@ -15,3 +15,9 @@ export interface getUserMoviesCollectionRequestDto {
 export interface UserMoviesCollectionResponseDto {
   moviesCollection: IMovie[];
 }
+
+export enum TabValues {
+  isFavorite = "is_favorite",
+  isWatchLater = "is_watch_later",
+  isWatched = "is_watched",
+}

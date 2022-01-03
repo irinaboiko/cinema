@@ -6,7 +6,7 @@ interface UserMoviesCollectionPayload extends CustomPayload {}
 
 export const GET_USER_MOVIES_COLLECTION_REQUEST = createActionCreator(
   "GET_USER_MOVIES_COLLECTION_REQUEST",
-  (resolve) => (payload: getUserMoviesCollectionRequestDto) => resolve(payload)
+  (resolve) => (payload: any) => resolve(payload)
 );
 export const GET_USER_MOVIES_COLLECTION_SUCCESS = createActionCreator(
   "GET_USER_MOVIES_COLLECTION_SUCCESS",
