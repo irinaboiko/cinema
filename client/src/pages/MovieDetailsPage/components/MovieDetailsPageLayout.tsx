@@ -2,6 +2,7 @@ import { Button } from "@material-ui/core";
 import React, { FC } from "react";
 import { IMovie } from "../../MoviesPage/dto/movie.dtos";
 import BackButton from "../../../commonComponents/Buttons/BackButton/BackButton";
+import DefaultSpinner from "../../../commonComponents/Spinner/DefaultSpinner";
 
 interface MovieDetailsPageLayoutProps {
   movieInfo: IMovie;
@@ -20,7 +21,7 @@ const MovieDetailsPageLayout: FC<MovieDetailsPageLayoutProps> = ({
   return (
     <>
       {isLoading ? (
-        <div>Loading...</div>
+        <DefaultSpinner isOpen={isLoading} />
       ) : (
         <div style={{ padding: 20 }}>
           <BackButton />

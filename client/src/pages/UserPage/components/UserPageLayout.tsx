@@ -7,6 +7,7 @@ import { TabContext, TabList, TabPanel } from "@mui/lab";
 import { IMovie } from "../../MoviesPage/dto/movie.dtos";
 import MovieCard from "../../../commonComponents/Cards/MovieCard";
 import UserMovieCard from "../../../commonComponents/Cards/UserMovieCard";
+import DefaultSpinner from "../../../commonComponents/Spinner/DefaultSpinner";
 
 interface ILoginPageLayoutProps {
   userInfo: UserDto;
@@ -14,6 +15,7 @@ interface ILoginPageLayoutProps {
   //handleTabChange: (event: SyntheticEvent, newTabValue: TabValues) => void;
   handleTabChange: any;
   moviesCollectionList: IMovie[];
+  isLoading: boolean;
 }
 
 const UserPageLayout: FC<ILoginPageLayoutProps> = ({
@@ -21,55 +23,62 @@ const UserPageLayout: FC<ILoginPageLayoutProps> = ({
   tabValue,
   handleTabChange,
   moviesCollectionList,
+  isLoading,
 }) => {
   return (
-    <div style={{ padding: 20 }}>
-      <UserCard userInfo={userInfo} />
-      <Box style={{ marginBottom: 20 }}>
-        <TabContext value={tabValue}>
-          <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-            <TabList onChange={handleTabChange} variant="fullWidth">
-              <Tab label="Favorites" value={TabValues.isFavorite} />
-              <Tab label="Watch Later" value={TabValues.isWatchLater} />
-              <Tab label="Watched" value={TabValues.isWatched} />
-            </TabList>
+    <>
+      {isLoading ? (
+        <DefaultSpinner isOpen={isLoading} />
+      ) : (
+        <div style={{ padding: 20 }}>
+          <UserCard userInfo={userInfo} />
+          <Box style={{ marginBottom: 20 }}>
+            <TabContext value={tabValue}>
+              <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+                <TabList onChange={handleTabChange} variant="fullWidth">
+                  <Tab label="Favorites" value={TabValues.isFavorite} />
+                  <Tab label="Watch Later" value={TabValues.isWatchLater} />
+                  <Tab label="Watched" value={TabValues.isWatched} />
+                </TabList>
+              </Box>
+              <TabPanel value={TabValues.isFavorite}>
+                <div>
+                  {moviesCollectionList.length > 0 ? (
+                    moviesCollectionList.map((movie) => {
+                      return <UserMovieCard movie={movie} key={movie._id} />;
+                    })
+                  ) : (
+                    <p>There are no any movies</p>
+                  )}
+                </div>
+              </TabPanel>
+              <TabPanel value={TabValues.isWatchLater}>
+                <div>
+                  {moviesCollectionList.length > 0 ? (
+                    moviesCollectionList.map((movie) => {
+                      return <UserMovieCard movie={movie} key={movie._id} />;
+                    })
+                  ) : (
+                    <p>There are no any movies</p>
+                  )}
+                </div>
+              </TabPanel>
+              <TabPanel value={TabValues.isWatched}>
+                <div>
+                  {moviesCollectionList.length > 0 ? (
+                    moviesCollectionList.map((movie) => {
+                      return <UserMovieCard movie={movie} key={movie._id} />;
+                    })
+                  ) : (
+                    <p>There are no any movies</p>
+                  )}
+                </div>
+              </TabPanel>
+            </TabContext>
           </Box>
-          <TabPanel value={TabValues.isFavorite}>
-            <div>
-              {moviesCollectionList.length > 0 ? (
-                moviesCollectionList.map((movie) => {
-                  return <UserMovieCard movie={movie} key={movie._id} />;
-                })
-              ) : (
-                <p>There are no any movies</p>
-              )}
-            </div>
-          </TabPanel>
-          <TabPanel value={TabValues.isWatchLater}>
-            <div>
-              {moviesCollectionList.length > 0 ? (
-                moviesCollectionList.map((movie) => {
-                  return <UserMovieCard movie={movie} key={movie._id} />;
-                })
-              ) : (
-                <p>There are no any movies</p>
-              )}
-            </div>
-          </TabPanel>
-          <TabPanel value={TabValues.isWatched}>
-            <div>
-              {moviesCollectionList.length > 0 ? (
-                moviesCollectionList.map((movie) => {
-                  return <UserMovieCard movie={movie} key={movie._id} />;
-                })
-              ) : (
-                <p>There are no any movies</p>
-              )}
-            </div>
-          </TabPanel>
-        </TabContext>
-      </Box>
-    </div>
+        </div>
+      )}
+    </>
   );
 };
 

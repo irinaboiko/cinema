@@ -12,6 +12,7 @@ import { ROUTES } from "../../../router/routeNames";
 import { SignInDto } from "../dto/login.dtos";
 
 import styles from "./styles";
+import DefaultSpinner from "../../../commonComponents/Spinner/DefaultSpinner";
 
 interface ILoginPageLayoutProps extends WithStyles<typeof styles> {
   formValues: SignInDto;
@@ -32,7 +33,7 @@ const LoginPageLayout: FC<ILoginPageLayoutProps> = ({
   return (
     <>
       {isLoading ? (
-        <Box>Loading...</Box>
+        <DefaultSpinner isOpen={isLoading} />
       ) : (
         <Box className={classes.formWrapper}>
           <form onSubmit={handleSubmit}>

@@ -5,6 +5,7 @@ import DefaultPagination from "../../../commonComponents/Pagination/DefaultPagin
 import AdminMovieCard from "../../../commonComponents/Cards/AdminMovieCard/AdminMovieCard";
 import { ROUTES } from "../../../router/routeNames";
 import { Link } from "react-router-dom";
+import DefaultSpinner from "../../../commonComponents/Spinner/DefaultSpinner";
 
 interface AdminPanelPageLayoutProps {
   moviesList: IMovie[];
@@ -32,7 +33,7 @@ const AdminPanelPageLayout: FC<AdminPanelPageLayoutProps> = ({
   return (
     <>
       {isLoading ? (
-        <div>Loading...</div>
+        <DefaultSpinner isOpen={isLoading} />
       ) : (
         <div style={{ padding: 20 }}>
           <div>

@@ -3,6 +3,7 @@ import React, { ChangeEvent, FC } from "react";
 import { IMovie } from "../dto/movie.dtos";
 import MovieCard from "../../../commonComponents/Cards/MovieCard";
 import DefaultPagination from "../../../commonComponents/Pagination/DefaultPagination";
+import DefaultSpinner from "../../../commonComponents/Spinner/DefaultSpinner";
 
 interface MoviesPageLayoutProps {
   moviesList: IMovie[];
@@ -24,7 +25,7 @@ const MoviesPageLayout: FC<MoviesPageLayoutProps> = ({
   return (
     <>
       {isLoading ? (
-        <div>Loading...</div>
+        <DefaultSpinner isOpen={isLoading} />
       ) : (
         <div>
           {moviesList.map((movieInfo, index) => {

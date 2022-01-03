@@ -11,7 +11,9 @@ const UserPageContainer: FC = () => {
 
   const [tabValue, setTabValue] = useState<TabValues>(TabValues.isFavorite);
 
-  const { moviesCollectionList } = useTypedSelector((state) => state.userPage);
+  const { isLoading, moviesCollectionList } = useTypedSelector(
+    (state) => state.userPage
+  );
   const { userInfo } = useTypedSelector((state) => state.auth);
   const userId = userInfo._id;
 
@@ -32,6 +34,7 @@ const UserPageContainer: FC = () => {
       tabValue={tabValue}
       handleTabChange={handleTabChange}
       moviesCollectionList={moviesCollectionList}
+      isLoading={isLoading}
     />
   );
 };

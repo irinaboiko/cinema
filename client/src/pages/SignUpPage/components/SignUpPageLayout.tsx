@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { ROUTES } from "../../../router/routeNames";
 import { Box, Button, Modal, TextField } from "@material-ui/core";
 import { SignUpDto } from "../dto/signUp.dtos";
+import DefaultSpinner from "../../../commonComponents/Spinner/DefaultSpinner";
 
 interface SignUpPageLayoutProps {
   isLoading: boolean;
@@ -28,7 +29,7 @@ const SignUpPageLayout: FC<SignUpPageLayoutProps> = ({
   return (
     <>
       {isLoading ? (
-        <div>Loading...</div>
+        <DefaultSpinner isOpen={isLoading} />
       ) : (
         <Box>
           <form onSubmit={handleSubmit}>
